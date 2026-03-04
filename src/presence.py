@@ -79,10 +79,17 @@ class DiscordRPC:
         logo = self.assets.get("logo", "deadlock_logo")
         logo_text = self.assets.get("logo_text", "Deadlock")
 
+        # Default layout:
+        # Large image is the hero (or logo if no hero)
         p: dict = {
             "large_image": state.hero_asset_name or logo,
-            "large_text": state.hero_display_name or logo_text,
+            "large_text": "Deadlock", # Keep main tooltip simple
         }
+        
+        # Add small image for the hero name to appear cleanly as a neat badge hover
+        if state.hero_display_name:
+            p["small_image"] = logo
+            p["small_text"] = state.hero_display_name
         if state.in_party:
             p["party_size"] = [state.party_size, PARTY_MAX]
 
@@ -135,9 +142,6 @@ class DiscordRPC:
                     p["state"] = f"Playing as {hero}"
                 else:
                     p["details"] = f" {mode_str}"
-                if state.hero_key:
-                    p["small_image"] = logo
-                    p["small_text"] = "The Archmother"
                 if state.match_start_time and state.match_mode not in (MatchMode.SANDBOX, MatchMode.TUTORIAL):
                     p["start"] = int(state.match_start_time)
 
