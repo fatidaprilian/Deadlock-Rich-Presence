@@ -121,6 +121,20 @@ class GameState:
         return f"hero_{key}"
 
     @property
+    def hero_icon_url(self) -> str | None:
+        """Direct URL for the hero's small icon from the API."""
+        if self.hero_key and _hero_store:
+            return _hero_store.icon_url(self.hero_key)
+        return None
+
+    @property
+    def hero_card_url(self) -> str | None:
+        """Direct URL for the hero's portrait card from the API."""
+        if self.hero_key and _hero_store:
+            return _hero_store.card_url(self.hero_key)
+        return None
+
+    @property
     def hero_hideout_text(self) -> str:
         """Hero-specific hideout presence text from the API, e.g. 'Mixing Drinks in the Hideout'."""
         if self.hero_key and _hero_store:

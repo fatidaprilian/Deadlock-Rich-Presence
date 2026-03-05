@@ -1,54 +1,52 @@
 {
     "discord_application_id": "1474302474474094634",
-
     "deadlock_install_path": "",
-
     "console_log_relative_path": "game/citadel/console.log",
-
-    "process_names": ["project8.exe", "deadlock.exe", "project8"],
-
+    "process_names": [
+        "project8.exe",
+        "deadlock.exe",
+        "project8"
+    ],
     "update_interval_seconds": 15,
-
     "resync_max_bytes": 10485760,
-
     "discord_assets": {
         "logo": "deadlock_logo",
         "logo_text": "Deadlock",
-        "queue_icon": "deadlock_logo"
+        "queue_icon": "deadlock_logo",
+        "map_image_url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1422450/library_hero.jpg"
     },
-
     "log_patterns": {
-        "change_game_state":    "ChangeGameState:\\s+(\\w+)\\s+\\((\\d+)\\)",
-        "hideout_lobby_state":  "\\[Hideout\\] Hideout Lobby Connection State:\\s+(\\w+)\\s+\\((-?\\d+)\\)",
-        "server_connect":       "\\[Client\\] CL:\\s+Connected to '([^']+)'",
-        "server_disconnect":    "\\[Client\\] Disconnecting from server:\\s+(\\S+)",
-        "server_shutdown":      "\\[Server\\] SV:\\s+Server shutting down:\\s+(\\S+)",
+        "change_game_state": "ChangeGameState:\\s+(\\w+)\\s+\\((\\d+)\\)",
+        "hideout_lobby_state": "\\[Hideout\\] Hideout Lobby Connection State:\\s+(\\w+)\\s+\\((-?\\d+)\\)",
+        "server_connect": "\\[Client\\] CL:\\s+Connected to '([^']+)'",
+        "server_disconnect": "\\[Client\\] Disconnecting from server:\\s+(\\S+)",
+        "server_shutdown": "\\[Server\\] SV:\\s+Server shutting down:\\s+(\\S+)",
         "map_created_physics": "\\[Client\\] Created physics for\\s+([^\\s]+)",
-        "silver_wolf_form_on":  "werewolf_transform\\.vmdl",
+        "silver_wolf_form_on": "werewolf_transform\\.vmdl",
         "silver_wolf_form_off": "werewolf\\.vmdl",
-        "mm_start":             "\\[GCClient\\] Send msg 9010 \\(k_EMsgClientToGCStartMatchmaking\\)",
-        "mm_stop":              "\\[GCClient\\] Send msg 9012 \\(k_EMsgClientToGCStopMatchmaking\\)",
-        "host_activate":        "\\[HostStateManager\\] Host activate:.*\\(([^)]+)\\)",
-        "loaded_hero":          "\\[Server\\] Loaded hero \\d+/(hero_\\w+)",
-        "client_hero_vmdl":     "VMDL Camera Pose Success!.*models/heroes(?:_wip|_staging)?/(\\w+)/",
-        "bot_init":             "Initializing bot for player slot \\d+:\\s+(k_ECitadelBotDifficulty_\\w+)",
-        "player_info":          "\\[Client\\] Players:\\s+(\\d+)\\s+\\((\\d+) bots\\)\\s+/\\s+(\\d+) humans",
-        "map_info":             "\\[Client\\] Map:\\s+\"([^\"]+)\"",
-        "app_shutdown":         "Dispatching EventAppShutdown_t",
-        "source2_shutdown":     "Source2Shutdown",
-        "precaching_heroes":    "Precaching (\\d+) heroes in CCitadelGameRules",
-        "loop_mode_menu":       "LoopMode:\\s*menu",
-        "lobby_created":        "Lobby\\s+\\d+\\s+for\\s+Match\\s+\\d+\\s+created",
-        "lobby_destroyed":      "Lobby\\s+\\d+\\s+for\\s+Match\\s+\\d+\\s+destroyed",
-        "spectate_broadcast":   "Playing Broadcast"
+        "mm_start": "\\[GCClient\\] Send msg 9010 \\(k_EMsgClientToGCStartMatchmaking\\)",
+        "mm_stop": "\\[GCClient\\] Send msg 9012 \\(k_EMsgClientToGCStopMatchmaking\\)",
+        "host_activate": "\\[HostStateManager\\] Host activate:.*\\(([^)]+)\\)",
+        "loaded_hero": "\\[Server\\] Loaded hero \\d+/(hero_\\w+)",
+        "client_hero_vmdl": "VMDL Camera Pose Success!.*models/heroes(?:_wip|_staging)?/(\\w+)/",
+        "bot_init": "Initializing bot for player slot \\d+:\\s+(k_ECitadelBotDifficulty_\\w+)",
+        "player_info": "\\[Client\\] Players:\\s+(\\d+)\\s+\\((\\d+) bots\\)\\s+/\\s+(\\d+) humans",
+        "map_info": "\\[Client\\] Map:\\s+\"([^\"]+)\"",
+        "app_shutdown": "Dispatching EventAppShutdown_t",
+        "source2_shutdown": "Source2Shutdown",
+        "precaching_heroes": "Precaching (\\d+) heroes in CCitadelGameRules",
+        "loop_mode_menu": "LoopMode:\\s*menu",
+        "lobby_created": "Lobby\\s+\\d+\\s+for\\s+Match\\s+\\d+\\s+created",
+        "lobby_destroyed": "Lobby\\s+\\d+\\s+for\\s+Match\\s+\\d+\\s+destroyed",
+        "spectate_broadcast": "Playing Broadcast"
     },
-
-    "hideout_maps": ["dl_hideout"],
-
+    "hideout_maps": [
+        "dl_hideout"
+    ],
     "map_to_mode": {
-        "street_test":          "unranked",
-        "street_test_bridge":   "unranked",
-        "new_player_basics":    "sandbox",
-        "dl_midtown":           "unknown"
+        "street_test": "unranked",
+        "street_test_bridge": "unranked",
+        "new_player_basics": "sandbox",
+        "dl_midtown": "unknown"
     }
 }

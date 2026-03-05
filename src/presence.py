@@ -79,16 +79,16 @@ class DiscordRPC:
         logo = self.assets.get("logo", "deadlock_logo")
         logo_text = self.assets.get("logo_text", "Deadlock")
 
-        # Default layout:
-        # Large image is the hero (or logo if no hero)
+        # Dynamic Layout Design:
+        # We start with a base setup suitable for the Lobby/Hideout
         p: dict = {
-            "large_image": state.hero_asset_name or logo,
-            "large_text": "Deadlock", # Keep main tooltip simple
+            "large_image": logo,
+            "large_text": "Deadlock",
         }
         
-        # Add small image for the hero name to appear cleanly as a neat badge hover
+        # In Lobby: Hero acts as a badge (small icon)
         if state.hero_display_name:
-            p["small_image"] = logo
+            p["small_image"] = state.hero_icon_url or state.hero_asset_name
             p["small_text"] = state.hero_display_name
         if state.in_party:
             p["party_size"] = [state.party_size, PARTY_MAX]
@@ -103,11 +103,11 @@ class DiscordRPC:
                 # Use hero-specific hideout flavour text from the API when available
                 # e.g. "Mixing Drinks in the Hideout" for Infernus
                 p["details"] = state.hero_hideout_text
-                p["state"] = "Playing Solo (1 of 6)"
+                p["state"] = "In Lobby (Solo)"
 
             case GamePhase.PARTY_HIDEOUT:
                 p["details"] = state.hero_hideout_text
-                p["state"] = f"Party of {state.party_size}"
+                p["state"] = f"In Lobby (Party of {state.party_size})"
 
             case GamePhase.IN_QUEUE:
                 p["details"] = "Looking for Match..."
@@ -127,9 +127,13 @@ class DiscordRPC:
                     p["state"] = f"Playing as {hero}"
                 else:
                     p["details"] = f" {mode_str}"
+                
+                # IN-MATCH SWAP: Emphasize the Hero Portrait
                 if state.hero_key:
+                    p["large_image"] = state.hero_card_url or state.hero_asset_name
+                    p["large_text"] = hero
                     p["small_image"] = logo
-                    p["small_text"] = logo_text
+                    p["small_text"] = "Deadlock"
 
             case GamePhase.IN_MATCH:
                 mode_str = state.mode_display()
@@ -142,6 +146,14 @@ class DiscordRPC:
                     p["state"] = f"Playing as {hero}"
                 else:
                     p["details"] = f" {mode_str}"
+                
+                # IN-MATCH SWAP: Emphasize the Hero Portrait
+                if state.hero_key:
+                    p["large_image"] = state.hero_card_url or state.hero_asset_name
+                    p["large_text"] = hero
+                    p["small_image"] = logo
+                    p["small_text"] = "Deadlock"
+
                 if state.match_start_time and state.match_mode not in (MatchMode.SANDBOX, MatchMode.TUTORIAL):
                     p["start"] = int(state.match_start_time)
 

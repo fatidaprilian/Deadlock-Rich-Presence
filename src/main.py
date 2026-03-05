@@ -26,14 +26,15 @@ LOG_DIR.mkdir(exist_ok=True)
 
 LOG_LEVEL = os.environ.get("DEADLOCK_RPC_LOG", "INFO").upper()
 
+log_handlers = [logging.FileHandler(LOG_DIR / "deadlock_rpc.log", encoding="utf-8")]
+if sys.stdout:
+    log_handlers.append(logging.StreamHandler(sys.stdout))
+
 logging.basicConfig(
     level=getattr(logging, LOG_LEVEL, logging.INFO),
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
     datefmt="%H:%M:%S",
-    handlers=[
-        logging.StreamHandler(sys.stdout),
-        logging.FileHandler(LOG_DIR / "deadlock_rpc.log", encoding="utf-8"),
-    ],
+    handlers=log_handlers,
 )
 logger = logging.getLogger("deadlock-rpc")
 SCRIPT_DIR = BUNDLE_DIR
@@ -245,10 +246,6 @@ def main():
         sys.exit(1)
 
     logger.info("Starting Deadlock Discord Rich Presence...")
-
-    # Launch Deadlock with -condebug
-    logger.info("Launching Deadlock via Steam with -condebug...")
-    launch_deadlock()
 
     app = DeadlockRPC(cfg)
 

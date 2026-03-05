@@ -26,6 +26,8 @@ class HeroInfo(TypedDict):
     name: str
     hideout_text: str   # maps to API field "hideout_rich_presence"
     asset_key: str      # Discord named-asset key, e.g. "hero_inferno"
+    icon_image: str     # External URL to the hero's small icon
+    card_image: str     # External URL to the hero's portrait card
 
 
 # ── embedded fallback (keeps the app working when offline) ─────────────────────
@@ -33,36 +35,36 @@ class HeroInfo(TypedDict):
 # the full list is fetched from the API at runtime.
 
 _FALLBACK: dict[str, HeroInfo] = {
-    "inferno":    {"name": "Infernus",   "hideout_text": "In the Hideout", "asset_key": "hero_inferno"},
-    "gigawatt":   {"name": "Seven",      "hideout_text": "In the Hideout", "asset_key": "hero_gigawatt"},
-    "hornet":     {"name": "Vindicta",   "hideout_text": "In the Hideout", "asset_key": "hero_hornet"},
-    "ghost":      {"name": "Lady Geist", "hideout_text": "In the Hideout", "asset_key": "hero_ghost"},
-    "atlas":      {"name": "Abrams",     "hideout_text": "In the Hideout", "asset_key": "hero_atlas"},
-    "wraith":     {"name": "Wraith",     "hideout_text": "In the Hideout", "asset_key": "hero_wraith"},
-    "forge":      {"name": "McGinnis",   "hideout_text": "In the Hideout", "asset_key": "hero_forge"},
-    "dynamo":     {"name": "Dynamo",     "hideout_text": "In the Hideout", "asset_key": "hero_dynamo"},
-    "haze":       {"name": "Haze",       "hideout_text": "In the Hideout", "asset_key": "hero_haze"},
-    "kelvin":     {"name": "Kelvin",     "hideout_text": "In the Hideout", "asset_key": "hero_kelvin"},
-    "lash":       {"name": "Lash",       "hideout_text": "In the Hideout", "asset_key": "hero_lash"},
-    "pocket":     {"name": "Pocket",     "hideout_text": "In the Hideout", "asset_key": "hero_pocket"},
-    "bebop":      {"name": "Bebop",      "hideout_text": "In the Hideout", "asset_key": "hero_bebop"},
-    "shiv":       {"name": "Shiv",       "hideout_text": "In the Hideout", "asset_key": "hero_shiv"},
-    "viscous":    {"name": "Viscous",    "hideout_text": "In the Hideout", "asset_key": "hero_viscous"},
-    "warden":     {"name": "Warden",     "hideout_text": "In the Hideout", "asset_key": "hero_warden"},
-    "yamato":     {"name": "Yamato",     "hideout_text": "In the Hideout", "asset_key": "hero_yamato"},
-    "tengu":      {"name": "Ivy",        "hideout_text": "In the Hideout", "asset_key": "hero_tengu"},
-    "orion":      {"name": "Grey Talon", "hideout_text": "In the Hideout", "asset_key": "hero_orion"},
-    "krill":      {"name": "Mo & Krill", "hideout_text": "In the Hideout", "asset_key": "hero_krill"},
-    "synth":      {"name": "Pocket",     "hideout_text": "In the Hideout", "asset_key": "hero_synth"},
-    "chrono":     {"name": "Paradox",    "hideout_text": "In the Hideout", "asset_key": "hero_chrono"},
-    "astro":      {"name": "Holliday",   "hideout_text": "In the Hideout", "asset_key": "hero_astro"},
-    "cadence":    {"name": "Calico",     "hideout_text": "In the Hideout", "asset_key": "hero_cadence"},
-    "werewolf":   {"name": "Silver",     "hideout_text": "In the Hideout", "asset_key": "hero_werewolf"},
-    "magician":   {"name": "Sinclair",   "hideout_text": "In the Hideout", "asset_key": "hero_magician"},
-    "archer":     {"name": "Grey Talon", "hideout_text": "In the Hideout", "asset_key": "hero_orion"},
-    "abrams":     {"name": "Abrams",     "hideout_text": "In the Hideout", "asset_key": "hero_atlas"},
-    "digger":     {"name": "Mo & Krill", "hideout_text": "In the Hideout", "asset_key": "hero_krill"},
-    "ivy":        {"name": "Ivy",        "hideout_text": "In the Hideout", "asset_key": "hero_tengu"},
+    "inferno":    {"name": "Infernus",   "hideout_text": "In the Hideout", "asset_key": "hero_inferno", "icon_image": "", "card_image": ""},
+    "gigawatt":   {"name": "Seven",      "hideout_text": "In the Hideout", "asset_key": "hero_gigawatt", "icon_image": "", "card_image": ""},
+    "hornet":     {"name": "Vindicta",   "hideout_text": "In the Hideout", "asset_key": "hero_hornet", "icon_image": "", "card_image": ""},
+    "ghost":      {"name": "Lady Geist", "hideout_text": "In the Hideout", "asset_key": "hero_ghost", "icon_image": "", "card_image": ""},
+    "atlas":      {"name": "Abrams",     "hideout_text": "In the Hideout", "asset_key": "hero_atlas", "icon_image": "", "card_image": ""},
+    "wraith":     {"name": "Wraith",     "hideout_text": "In the Hideout", "asset_key": "hero_wraith", "icon_image": "", "card_image": ""},
+    "forge":      {"name": "McGinnis",   "hideout_text": "In the Hideout", "asset_key": "hero_forge", "icon_image": "", "card_image": ""},
+    "dynamo":     {"name": "Dynamo",     "hideout_text": "In the Hideout", "asset_key": "hero_dynamo", "icon_image": "", "card_image": ""},
+    "haze":       {"name": "Haze",       "hideout_text": "In the Hideout", "asset_key": "hero_haze", "icon_image": "", "card_image": ""},
+    "kelvin":     {"name": "Kelvin",     "hideout_text": "In the Hideout", "asset_key": "hero_kelvin", "icon_image": "", "card_image": ""},
+    "lash":       {"name": "Lash",       "hideout_text": "In the Hideout", "asset_key": "hero_lash", "icon_image": "", "card_image": ""},
+    "pocket":     {"name": "Pocket",     "hideout_text": "In the Hideout", "asset_key": "hero_pocket", "icon_image": "", "card_image": ""},
+    "bebop":      {"name": "Bebop",      "hideout_text": "In the Hideout", "asset_key": "hero_bebop", "icon_image": "", "card_image": ""},
+    "shiv":       {"name": "Shiv",       "hideout_text": "In the Hideout", "asset_key": "hero_shiv", "icon_image": "", "card_image": ""},
+    "viscous":    {"name": "Viscous",    "hideout_text": "In the Hideout", "asset_key": "hero_viscous", "icon_image": "", "card_image": ""},
+    "warden":     {"name": "Warden",     "hideout_text": "In the Hideout", "asset_key": "hero_warden", "icon_image": "", "card_image": ""},
+    "yamato":     {"name": "Yamato",     "hideout_text": "In the Hideout", "asset_key": "hero_yamato", "icon_image": "", "card_image": ""},
+    "tengu":      {"name": "Ivy",        "hideout_text": "In the Hideout", "asset_key": "hero_tengu", "icon_image": "", "card_image": ""},
+    "orion":      {"name": "Grey Talon", "hideout_text": "In the Hideout", "asset_key": "hero_orion", "icon_image": "", "card_image": ""},
+    "krill":      {"name": "Mo & Krill", "hideout_text": "In the Hideout", "asset_key": "hero_krill", "icon_image": "", "card_image": ""},
+    "synth":      {"name": "Pocket",     "hideout_text": "In the Hideout", "asset_key": "hero_synth", "icon_image": "", "card_image": ""},
+    "chrono":     {"name": "Paradox",    "hideout_text": "In the Hideout", "asset_key": "hero_chrono", "icon_image": "", "card_image": ""},
+    "astro":      {"name": "Holliday",   "hideout_text": "In the Hideout", "asset_key": "hero_astro", "icon_image": "", "card_image": ""},
+    "cadence":    {"name": "Calico",     "hideout_text": "In the Hideout", "asset_key": "hero_cadence", "icon_image": "", "card_image": ""},
+    "werewolf":   {"name": "Silver",     "hideout_text": "In the Hideout", "asset_key": "hero_werewolf", "icon_image": "", "card_image": ""},
+    "magician":   {"name": "Sinclair",   "hideout_text": "In the Hideout", "asset_key": "hero_magician", "icon_image": "", "card_image": ""},
+    "archer":     {"name": "Grey Talon", "hideout_text": "In the Hideout", "asset_key": "hero_orion", "icon_image": "", "card_image": ""},
+    "abrams":     {"name": "Abrams",     "hideout_text": "In the Hideout", "asset_key": "hero_atlas", "icon_image": "", "card_image": ""},
+    "digger":     {"name": "Mo & Krill", "hideout_text": "In the Hideout", "asset_key": "hero_krill", "icon_image": "", "card_image": ""},
+    "ivy":        {"name": "Ivy",        "hideout_text": "In the Hideout", "asset_key": "hero_tengu", "icon_image": "", "card_image": ""},
 }
 
 # ── asset key overrides (old internal name -> correct Discord asset) ───────────
@@ -129,6 +131,20 @@ class HeroDataStore:
             return info["asset_key"]
         return f"hero_{codename}"
 
+    def icon_url(self, codename: str) -> str | None:
+        """Return the URL for the hero's small icon or None if unavailable/offline."""
+        info = self.get(codename)
+        if info and info.get("icon_image"):
+            return info["icon_image"]
+        return None
+
+    def card_url(self, codename: str) -> str | None:
+        """Return the URL for the hero's large portrait card or None if unavailable/offline."""
+        info = self.get(codename)
+        if info and info.get("card_image"):
+            return info["card_image"]
+        return None
+
     # ── private ────────────────────────────────────────────────────────────────
 
     def _try_load_cache(self) -> bool:
@@ -180,10 +196,16 @@ class HeroDataStore:
             # Use override if exists, otherwise use the full class_name from the API.
             asset_key = _ASSET_OVERRIDES.get(codename, class_name)
 
+            images = hero.get("images", {})
+            icon_image = images.get("icon_hero_card", "") if isinstance(images, dict) else ""
+            card_image = images.get("portrait", "") if isinstance(images, dict) else ""
+
             parsed[codename] = HeroInfo(
                 name=name,
                 hideout_text=hideout_text,
                 asset_key=asset_key,
+                icon_image=icon_image,
+                card_image=card_image,
             )
 
         if parsed:
