@@ -386,10 +386,11 @@ class LogWatcher:
                 self.state.bot_count = int(m.group(2))
 
                 count = self.state.player_count
-                if self.state.match_mode == MatchMode.UNKNOWN:
-                    if count >= 9: # >= 9 instead of strictly 12 to account for players who haven't yet connected
+                # Only guess match mode if we haven't locked onto a specific known mode
+                if self.state.match_mode in (MatchMode.UNKNOWN, MatchMode.STREET_BRAWL, MatchMode.UNRANKED):
+                    if count >= 9: # >= 9 to account for players who haven't yet connected
                         self.state.match_mode = MatchMode.UNRANKED
-                    elif count >= 5: # same reason
+                    elif count >= 5 and self.state.match_mode == MatchMode.UNKNOWN:
                         self.state.match_mode = MatchMode.STREET_BRAWL
 
         # (>0 means real match loading)
