@@ -330,7 +330,8 @@ class LogWatcher:
                 state_id = int(m.group(2))
                 self.state.game_state_id = state_id
 
-                if not self._hideout_loaded:
+                # Do not treat GameState transitions as match starts if we are on a hideout map
+                if self.state.map_name not in self.hideout_maps and not self._hideout_loaded:
                     if state_name == "matchintro" or state_id == 4:
                         self.state.enter_match_intro()
                     elif state_name in ("gameinprogress", "inprogress") or state_id in (7,):
@@ -356,7 +357,9 @@ class LogWatcher:
                 difficulty = m.group(1).replace("k_ECitadelBotDifficulty_", "")
                 self._bot_init_count += 1
                 self.state.bot_difficulty = difficulty
-                self.state.match_mode = MatchMode.BOT_MATCH
+                # Only explicitly set match mode if we aren't in hideout
+                if self.state.map_name not in self.hideout_maps:
+                    self.state.match_mode = MatchMode.BOT_MATCH
 
         # Host activate (map fully loaded)
         elif m := self._match("host_activate", line):
