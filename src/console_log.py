@@ -226,9 +226,16 @@ class LogWatcher:
 
         # Map -> mode (only for maps with a known specific mode, e.g. sandbox)
         # dl_midtown is shared by all match types so it maps to UNKNOWN
-        mapped_mode = self.map_to_mode.get(map_name)
-        if mapped_mode and mapped_mode != MatchMode.UNKNOWN:
+        # dl_midtown is shared by all match types so it maps to UNKNOWN
+        mapped_mode = self.map_to_mode.get(map_name, MatchMode.UNKNOWN)
+        if mapped_mode != MatchMode.UNKNOWN:
             self.state.match_mode = mapped_mode
+        else:
+            # If the new map is UNKNOWN (like dl_midtown), forcefully clear any leaked 
+            # match modes (like SANDBOX) that might have been precached moments before.
+            # But preserve BOT_MATCH if it was already established by bot init triggers beforehand.
+            if self.state.match_mode not in (MatchMode.BOT_MATCH, MatchMode.UNRANKED, MatchMode.STREET_BRAWL):
+                self.state.match_mode = MatchMode.UNKNOWN
 
         # Hideout maps
         if map_name in self.hideout_maps:
